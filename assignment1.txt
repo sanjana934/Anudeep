@@ -1,0 +1,181 @@
+mysql> show databases;
++--------------------------+
+| Database                 |
++--------------------------+
+| aggregation              |
+| anp_d4848                |
+| ecommerce                |
+| information_schema       |
+| joints                   |
+| mysql                    |
+| performance_schema       |
+| student_management       |
+| studentmanagementsystem  |
+| studentmanagementsystem1 |
+| studentmanagementsystem2 |
+| sys                      |
+| test                     |
++--------------------------+
+13 rows in set (0.01 sec)
+
+mysql> use ecommerce;
+Database changed
+mysql> create table employee(employeeID int(10) not null primary key,employeeName varchar(50) not null,salary double not null);
+ERROR 1050 (42S01): Table 'employee' already exists
+mysql> create table employe(employeID int(10) not null primary key,employeName varchar(50) not null,salary double not null);
+Query OK, 0 rows affected, 1 warning (0.05 sec)
+
+mysql> insert into employe values(01,'Neha singh',50000),(02,'shalu khan',80000),(03,'shreya kanu',60000),(04,'shweta yadav',70000),(05,'sanjana gupta',80000);
+Query OK, 5 rows affected (0.01 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> select *from employee;
++------------+---------------+--------+
+| employeeID | employeeName  | salary |
++------------+---------------+--------+
+|          1 | Neha singh    |  50000 |
+|          2 | shalu khan    |  80000 |
+|          3 | shreya kanu   |  60000 |
+|          4 | shweta yadav  |  70000 |
+|          5 | sanajan gupta |  90000 |
++------------+---------------+--------+
+5 rows in set (0.00 sec)
+
+mysql> update employe set salary=100000 where employeID=5;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select *from employe;
++-----------+---------------+--------+
+| employeID | employeName   | salary |
++-----------+---------------+--------+
+|         1 | Neha singh    |  50000 |
+|         2 | shalu khan    |  80000 |
+|         3 | shreya kanu   |  60000 |
+|         4 | shweta yadav  |  70000 |
+|         5 | sanjana gupta | 100000 |
++-----------+---------------+--------+
+5 rows in set (0.00 sec)
+
+mysql> update employe set employeName='Shela singh' where employeID=2;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select *from employe;
++-----------+---------------+--------+
+| employeID | employeName   | salary |
++-----------+---------------+--------+
+|         1 | Neha singh    |  50000 |
+|         2 | Shela singh   |  80000 |
+|         3 | shreya kanu   |  60000 |
+|         4 | shweta yadav  |  70000 |
+|         5 | sanjana gupta | 100000 |
++-----------+---------------+--------+
+5 rows in set (0.00 sec)
+
+mysql> delete from employe where empolyeID=5;
+ERROR 1054 (42S22): Unknown column 'empolyeID' in 'where clause'
+mysql> delete from employe where employeID=5;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> delete from employe;
+Query OK, 4 rows affected (0.01 sec)
+
+mysql> select *from employe;
+Empty set (0.00 sec)
+
+mysql> desc employe;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| employeID   | int         | NO   | PRI | NULL    |       |
+| employeName | varchar(50) | NO   |     | NULL    |       |
+| salary      | double      | NO   |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+3 rows in set (0.01 sec)
+
+mysql> insert into employe values(01,'Neha singh',50000),(02,'shalu khan',80000),(03,'shreya kanu',60000),(04,'shweta yadav',70000),(05,'sanjana gupta',80000);
+Query OK, 5 rows affected (0.01 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> select *from employe;
++-----------+---------------+--------+
+| employeID | employeName   | salary |
++-----------+---------------+--------+
+|         1 | Neha singh    |  50000 |
+|         2 | shalu khan    |  80000 |
+|         3 | shreya kanu   |  60000 |
+|         4 | shweta yadav  |  70000 |
+|         5 | sanjana gupta |  80000 |
++-----------+---------------+--------+
+5 rows in set (0.00 sec)
+
+mysql> truncate table employe;
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> select *from employe;
+Empty set (0.00 sec)
+
+mysql> desc employe;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| employeID   | int         | NO   | PRI | NULL    |       |
+| employeName | varchar(50) | NO   |     | NULL    |       |
+| salary      | double      | NO   |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> drop table employe;
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> create table employee(employeeID int(10) not null primary key,employeeName varchar(50) not null,salary double not null);
+ERROR 1050 (42S01): Table 'employee' already exists
+mysql> create table employe(employeID int(10) not null primary key,employeName varchar(50) not null,salary double not null);
+Query OK, 0 rows affected, 1 warning (0.03 sec)
+
+mysql> insert into employe values(01,'Neha singh',50000),(02,'shalu khan',80000),(03,'shreya kanu',60000),(04,'shweta yadav',70000),(05,'sanjana gupta',80000);
+Query OK, 5 rows affected (0.01 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> select *from employe;
++-----------+---------------+--------+
+| employeID | employeName   | salary |
++-----------+---------------+--------+
+|         1 | Neha singh    |  50000 |
+|         2 | shalu khan    |  80000 |
+|         3 | shreya kanu   |  60000 |
+|         4 | shweta yadav  |  70000 |
+|         5 | sanjana gupta |  80000 |
++-----------+---------------+--------+
+5 rows in set (0.00 sec)
+
+mysql> alter table employe add email varchar(100) not null;
+Query OK, 0 rows affected (0.04 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc employe;
++-------------+--------------+------+-----+---------+-------+
+| Field       | Type         | Null | Key | Default | Extra |
++-------------+--------------+------+-----+---------+-------+
+| employeID   | int          | NO   | PRI | NULL    |       |
+| employeName | varchar(50)  | NO   |     | NULL    |       |
+| salary      | double       | NO   |     | NULL    |       |
+| email       | varchar(100) | NO   |     | NULL    |       |
++-------------+--------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> alter table employe modify employeName varchar(100) not null;
+Query OK, 5 rows affected (0.14 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> desc employe;
++-------------+--------------+------+-----+---------+-------+
+| Field       | Type         | Null | Key | Default | Extra |
++-------------+--------------+------+-----+---------+-------+
+| employeID   | int          | NO   | PRI | NULL    |       |
+| employeName | varchar(100) | NO   |     | NULL    |       |
+| salary      | double       | NO   |     | NULL    |       |
+| email       | varchar(100) | NO   |     | NULL    |       |
++-------------+--------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
