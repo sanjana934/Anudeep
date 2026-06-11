@@ -1,0 +1,55 @@
+
+mysql> show databases;
++--------------------------+
+| Database                 |
++--------------------------+
+| aggregation              |
+| anp_d4848                |
+| bank                     |
+| ecommerce                |
+| information_schema       |
+| joints                   |
+| mysql                    |
+| performance_schema       |
+| student_management       |
+| studentmanagementsystem  |
+| studentmanagementsystem1 |
+| studentmanagementsystem2 |
+| sys                      |
+| test                     |
++--------------------------+
+14 rows in set (0.01 sec)
+
+mysql> use ecommerce;
+Database changed
+mysql> create table student(stud_id int primary key,firstname varchar(50),lastname varchar(50),age int,phoneNo varchar(15),address varchar(100));
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> insert into student(stud_id, firstname, lastname, age, phoneNo, address) values(1,'kinjal','sharma',20,'83746647463','Mumbai'),(2,'priya','verma',21,'9876543212','pune'),(3,'neha','sharma',22,'7654321897','lucknow'),(4,'riya','singh',20,'8765432198','jaipur'),(5,'karan','singh',22,'6547382918','delhi');
+Query OK, 5 rows affected (0.01 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> select *from student order by lastname ASC;
++---------+-----------+----------+------+-------------+---------+
+| stud_id | firstname | lastname | age  | phoneNo     | address |
++---------+-----------+----------+------+-------------+---------+
+|       1 | kinjal    | sharma   |   20 | 83746647463 | Mumbai  |
+|       3 | neha      | sharma   |   22 | 7654321897  | lucknow |
+|       4 | riya      | singh    |   20 | 8765432198  | jaipur  |
+|       5 | karan     | singh    |   22 | 6547382918  | delhi   |
+|       2 | priya     | verma    |   21 | 9876543212  | pune    |
++---------+-----------+----------+------+-------------+---------+
+5 rows in set (0.01 sec)
+
+
+mysql> select stud_id, firstname, lastname, age, phoneNo, address from student order by lastname ASC;
++---------+-----------+----------+------+-------------+---------+
+| stud_id | firstname | lastname | age  | phoneNo     | address |
++---------+-----------+----------+------+-------------+---------+
+|       1 | kinjal    | sharma   |   20 | 83746647463 | Mumbai  |
+|       3 | neha      | sharma   |   22 | 7654321897  | lucknow |
+|       4 | riya      | singh    |   20 | 8765432198  | jaipur  |
+|       5 | karan     | singh    |   22 | 6547382918  | delhi   |
+|       2 | priya     | verma    |   21 | 9876543212  | pune    |
++---------+-----------+----------+------+-------------+---------+
+5 rows in set (0.00 sec)
