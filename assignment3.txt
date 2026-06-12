@@ -1,0 +1,146 @@
+
+mysql> show databases;
++--------------------------+
+| Database                 |
++--------------------------+
+| aggregation              |
+| anp_d4848                |
+| bank                     |
+| ecommerce                |
+| information_schema       |
+| joints                   |
+| mysql                    |
+| performance_schema       |
+| student_management       |
+| studentmanagementsystem  |
+| studentmanagementsystem1 |
+| studentmanagementsystem2 |
+| sys                      |
+| test                     |
++--------------------------+
+14 rows in set (0.15 sec)
+
+mysql> use ecommerce;
+Database changed
+mysql> create database joins;
+Query OK, 1 row affected (0.04 sec)
+
+mysql> use joins;
+Database changed
+mysql> create table department(department_id int not null primary key,department_name varchar(30) not null);
+Query OK, 0 rows affected (0.09 sec)
+
+mysql> desc department;
++-----------------+-------------+------+-----+---------+-------+
+| Field           | Type        | Null | Key | Default | Extra |
++-----------------+-------------+------+-----+---------+-------+
+| department_id   | int         | NO   | PRI | NULL    |       |
+| department_name | varchar(30) | NO   |     | NULL    |       |
++-----------------+-------------+------+-----+---------+-------+
+2 rows in set (0.02 sec)
+
+mysql> insert into department values(1,'HR'),(2,'IT'),(3,'Finanace'),(4,'Marketing');
+Query OK, 4 rows affected (0.02 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> select *from department;
++---------------+-----------------+
+| department_id | department_name |
++---------------+-----------------+
+|             1 | HR              |
+|             2 | IT              |
+|             3 | Finanace        |
+|             4 | Marketing       |
++---------------+-----------------+
+4 rows in set (0.00 sec)
+
+mysql> create table employe(employeID INT PRIMARY KEY NOT NULL,employe_name VARCHAR(10) NOT NULL, department_id INT, FOREIGN KEY (department_id) REFERENCES department(department_id));
+Query OK, 0 rows affected (0.09 sec)
+
+mysql> insert into employe values(1,'Kinjal',1),(2,'riya',2),(3,'Ruchi',1),(4,'Diksha',null),(5,'sana',4);
+Query OK, 5 rows affected (0.01 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> select *from employe;
++-----------+--------------+---------------+
+| employeID | employe_name | department_id |
++-----------+--------------+---------------+
+|         1 | Kinjal       |             1 |
+|         2 | riya         |             2 |
+|         3 | Ruchi        |             1 |
+|         4 | Diksha       |          NULL |
+|         5 | sana         |             4 |
++-----------+--------------+---------------+
+5 rows in set (0.00 sec)
+
+mysql> select *from department;
++---------------+-----------------+
+| department_id | department_name |
++---------------+-----------------+
+|             1 | HR              |
+|             2 | IT              |
+|             3 | Finanace        |
+|             4 | Marketing       |
++---------------+-----------------+
+4 rows in set (0.01 sec)
+
+mysql> select *from employe inner join department on employe.department_id=department.department_id;
++-----------+--------------+---------------+---------------+-----------------+
+| employeID | employe_name | department_id | department_id | department_name |
++-----------+--------------+---------------+---------------+-----------------+
+|         1 | Kinjal       |             1 |             1 | HR              |
+|         3 | Ruchi        |             1 |             1 | HR              |
+|         2 | riya         |             2 |             2 | IT              |
+|         5 | sana         |             4 |             4 | Marketing       |
++-----------+--------------+---------------+---------------+-----------------+
+4 rows in set (0.00 sec)
+
+mysql> select employe_name,department_name from employe inner join department on  employe.department_id = department.department_id;
++--------------+-----------------+
+| employe_name | department_name |
++--------------+-----------------+
+| Kinjal       | HR              |
+| Ruchi        | HR              |
+| riya         | IT              |
+| sana         | Marketing       |
++--------------+-----------------+
+4 rows in set (0.00 sec)
+
+mysql> select employe_name,department_name from employe right join department on employe.department_id=department.department_id;
++--------------+-----------------+
+| employe_name | department_name |
++--------------+-----------------+
+| Kinjal       | HR              |
+| Ruchi        | HR              |
+| riya         | IT              |
+| NULL         | Finanace        |
+| sana         | Marketing       |
++--------------+-----------------+
+5 rows in set (0.00 sec)
+
+mysql> select employe_name,department_name from employe cross join department;
++--------------+-----------------+
+| employe_name | department_name |
++--------------+-----------------+
+| Kinjal       | Marketing       |
+| Kinjal       | Finanace        |
+| Kinjal       | IT              |
+| Kinjal       | HR              |
+| riya         | Marketing       |
+| riya         | Finanace        |
+| riya         | IT              |
+| riya         | HR              |
+| Ruchi        | Marketing       |
+| Ruchi        | Finanace        |
+| Ruchi        | IT              |
+| Ruchi        | HR              |
+| Diksha       | Marketing       |
+| Diksha       | Finanace        |
+| Diksha       | IT              |
+| Diksha       | HR              |
+| sana         | Marketing       |
+| sana         | Finanace        |
+| sana         | IT              |
+| sana         | HR              |
++--------------+-----------------+
+20 rows in set (0.00 sec)
